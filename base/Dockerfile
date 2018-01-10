@@ -203,6 +203,9 @@ RUN cd /work && \
   make && \
   make install
 
+RUN mkdir -p /root/.ncbi && \
+  echo '/repository/user/main/public/root = "/data/"' > /root/.ncbi/user-settings.mkfg
+
 RUN cd /work/ngs/ngs-python && \
   python setup.py install && \
   cp /usr/local/ncbi/sra-tools/bin/* /usr/local/bin
