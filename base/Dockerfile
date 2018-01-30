@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 
 MAINTAINER Sriram P C sriram.pc@gmail.com
 
@@ -44,12 +44,11 @@ RUN set ex; \
   binutils \
   build-essential \
   bzip2 \
-  c++11 \
   cmake \
   dpkg-dev \
-  g++ \
-  gcc \
-  gfortran \
+  g++-6 \
+  gcc-6 \
+  gfortran-6 \
   openssl \
   libatlas-dev \
   libblas-dev \
@@ -73,6 +72,7 @@ RUN set ex; \
   wget \
   zlib1g-dev
 
+RUN which g++
 #  python python-dev zlib1g-dev python-numpy python-pip \
 # install python from the source : taken from  https://github.com/docker-library/python
 # ensure local python is preferred over distribution python
@@ -119,7 +119,7 @@ RUN set -ex \
   && make install \
   && ldconfig \
   \
-  && apt-get purge -y --auto-remove $buildDeps \
+  && apt-get purge -y $buildDeps \
   \
   && find /usr/local -depth \
     \( \
@@ -155,13 +155,16 @@ RUN set -ex; \
 RUN pip install --no-cache-dir virtualenv
 
 # upgrade java and set java home
-RUN apt-get update -y && apt-get install -y openjdk-7-jdk openjdk-7-doc openjdk-7-jre-lib
+RUN apt-get update -y && apt-get install -y openjdk-8-jdk openjdk-8-doc openjdk-8-jre
 
-ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
-ENV PATH $PATH:/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/
-RUN sed -i 'aPATH=$PATH:/usr/lib/jvm/java-7-openjdk-amd64/jre/bin' /root/.bashrc
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+ENV PATH $PATH:/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/
+RUN sed -i 'aPATH=$PATH:/usr/lib/jvm/java-8-openjdk-amd64/jre/bin' /root/.bashrc
+
+
 
 # install samtools
+ENV PERL5LIB "."
 RUN cd /work && \
   git clone git://github.com/samtools/htslib.git && \
   git clone git://github.com/samtools/bcftools.git && \
@@ -184,6 +187,7 @@ RUN cd /work && \
   ./configure && \
   make && \
   make install
+
 
 # install sra tools
 RUN cd /work && \
@@ -213,6 +217,11 @@ RUN cd /work/ngs/ngs-python && \
 # python libraries
 RUN pip install Scons && \
   pip install pysam
+
+
+#
+# install nextflow
+RUN cd /usr/local/bin && curl -s https://get.nextflow.io | bash 
 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
