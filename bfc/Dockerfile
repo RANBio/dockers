@@ -13,5 +13,10 @@ RUN cd /work && \
   make && \
   cp bfc /usr/local/bin/
 
+RUN cd /work && \
+  git clone https://github.com/lh3/bwa.git && \
+  cd /work/bwa && \
+  make && \
+  cp bwa /usr/local/bin
 
 ENV RUN_CMD bfc

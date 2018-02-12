@@ -1,2 +1,2 @@
-# Rreproducibility and Assesment of NGS Software 
-Docker files for the Reproducibility and Assesment of NGS Software
+# Reproducibility and Comparative Evaluation of NGS Software 
+Docker files for the RCENTS projects
