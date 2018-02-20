@@ -13,3 +13,9 @@ RUN set ex; \
 RUN wget https://bioinformatics.csiro.au/public/files/Linux-1.1.3.tar.gz; \
   tar xvzf Linux-1.1.3.tar.gz; \
   mv Linux/* .
+
+RUN cd /work && \
+  git clone https://github.com/BenLangmead/bowtie2.git && \
+  cd /work/bowtie2 && \
+  make && \
+  cp bowtie2* /usr/local/bin
