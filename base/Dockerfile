@@ -219,6 +219,11 @@ RUN pip install Scons && \
   pip install pysam
 
 
+RUN cd /work/ && \
+  git clone https://github.com/RCENTS/samutils.git && \
+  cd samutils && \
+  python setup.py install
+
 #
 # install nextflow
 RUN cd /usr/local/bin && curl -s https://get.nextflow.io | bash 
