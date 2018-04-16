@@ -116,18 +116,27 @@ RUN cd /work && \
 
 # install sra tools
 RUN cd /work && \
-  git clone git://github.com/ncbi/ngs.git && \
-  git clone git://github.com/ncbi/ncbi-vdb.git && \
-  git clone git://github.com/ncbi/sra-tools.git && \
-  cd /work/ncbi-vdb && \
+  wget https://github.com/ncbi/ngs/archive/2.9.0.tar.gz -O ngs-2.9.0.tar.gz && \
+  wget https://github.com/ncbi/ncbi-vdb/archive/2.8.2-2.tar.gz -O ncbi-vdb-2.8.2-2.tar.gz && \
+  wget https://github.com/ncbi/sra-tools/archive/2.8.2-5.tar.gz -O sra-tools-2.8.2-5.tar.gz && \
+  tar xvzf ncbi-vdb-2.8.2-2.tar.gz && \
+  tar xvzf ngs-2.9.0.tar.gz && \
+  tar xvzf sra-tools-2.8.2-5.tar.gz && \
+  mv ngs-2.9.0 ngs && \
+  mv ncbi-vdb-2.8.2-2 ncbi-vdb && \
+  mv sra-tools-2.8.2-5 sra-tools
+
+RUN cd /work/ngs && \
   ./configure --build-prefix=/work/ncbi-outdir && \
   make && \
-  make install && \
-  cd /work/ngs && \
+  make install 
+
+RUN cd /work/ncbi-vdb && \
   ./configure --build-prefix=/work/ncbi-outdir && \
   make && \
-  make install && \
-  cd /work/sra-tools  && \
+  make install 
+
+RUN cd /work/sra-tools  && \
   ./configure --build-prefix=/work/ncbi-outdir && \
   make && \
   make install
