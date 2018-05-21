@@ -36,4 +36,12 @@ RUN wget https://github.com/gmarcais/Jellyfish/releases/download/v1.1.12/jellyfi
     cd jellyfish-1.1.12 && \
     ./configure --prefix=/usr/ && \
     make && \
-    make install
+    make install 
+
+RUN echo deb http://mirror.las.iastate.edu/CRAN/bin/linux/debian stretch-cran35/ >> /etc/apt/sources.list && \
+    apt-get -y update && \
+    apt-key adv --keyserver keys.gnupg.net --recv-key "E19F5F87128899B192B1A2C2AD5F960A256A04AF" && \
+    apt-get -y update && \
+    apt-get install -y r-base r-base-dev
+
+RUN R -e "install.packages('VGAM', repos='https://cloud.r-project.org' )"
