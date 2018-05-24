@@ -19,4 +19,4 @@ RUN cd /work && \
   make && \
   cp bwa /usr/local/bin
 
-ENV RUN_CMD bfc
+ENV RUN_CMD RACER
