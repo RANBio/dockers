@@ -8,7 +8,17 @@ RUN cd /work && \
   make && \
   cp bwa /usr/local/bin
 
-RUN wget http://packages.seqan.de/fiona/fiona-0.2.10-Linux-x86_64.tar.xz && \
-  tar -xf fiona-0.2.10-Linux-x86_64.tar.xz && \
-  cd fiona-0.2.10-Linux-x86_64/bin && \
-  cp fiona /usr/local/bin;
+RUN apt-get -y update && apt-get -y install libboost-all-dev 
+
+RUN cd /work && wget https://github.com/seqan/seqan/archive/seqan-v2.4.0.tar.gz && \
+  tar xvzf seqan-v2.4.0.tar.gz && \
+  cd seqan-seqan-v2.4.0 && \
+  mkdir -p build  &&  \
+  cd build && \
+  cmake .. && \
+  make fiona && \
+  cp bin/fiona /usr/local/bin/ && \
+  cd /work && rm -rf seqan-seqan-v2.4.0 seqan-seqan-v2.4.0.tar.gz
+
+ENV RUN_CMD fiona
+

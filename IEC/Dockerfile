@@ -45,7 +45,7 @@ RUN mkdir -p /work/ && \
 # apt -y install bamtools
 
 # build SGA
-RUN mkdir -p /src && \
+RUN cd /work && mkdir -p /src && \
      cd /src && \
      wget https://github.com/jts/sga/archive/v0.10.15.tar.gz && \
      tar -xzvf v0.10.15.tar.gz && \
@@ -61,3 +61,5 @@ RUN cd /work/ && \
     git clone https://github.com/hillerlab/IterativeErrorCorrection.git && \
     cp IterativeErrorCorrection/SGA-ICE.py /usr/local/bin/
 
+
+ENV RUN_CMD SGA-ICE.py

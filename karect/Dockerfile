@@ -16,9 +16,11 @@ RUN cd /work && \
   cd /work/bowtie2 && \
   make && \
   cp bowtie2* /usr/local/bin
-RUN wget https://github.com/aminallam/karect/tarball/master && \
-    tar -xzvf master && \
-    cd aminallam-karect-ba3ad54 && \
-    make && \
-    cp karect /usr/local/bin;
 
+RUN cd /work && wget https://github.com/aminallam/karect/archive/v1.0.tar.gz && \
+    tar -xzvf v1.0.tar.gz && \
+    cd karect-1.0 && \
+    make && \
+    cp karect /usr/local/bin
+
+ENV RUN_CMD karect

@@ -18,3 +18,7 @@ RUN cd /work/ && \
     echo "java -jar /usr/bin/shrec.jar \$@" >> SHREC && \
     chmod +x SHREC && \
     cp SHREC /usr/bin/ 
+
+
+ENV RUN_CMD SHREC
+

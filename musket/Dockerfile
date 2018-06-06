@@ -9,8 +9,12 @@ RUN cd /work && \
   cp bwa /usr/local/bin;
 
   
-RUN wget https://downloads.sourceforge.net/project/musket/musket-1.1.tar.gz && \
+RUN cd /work/ && wget https://downloads.sourceforge.net/project/musket/musket-1.1.tar.gz && \
     tar -xzvf musket-1.1.tar.gz && \
     cd musket-1.1 && \
     make && \
     cp musket /usr/local/bin
+
+
+ENV RUN_CMD musket
+

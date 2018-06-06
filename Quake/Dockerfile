@@ -30,7 +30,7 @@ RUN cd /work && \
     cd ../bin && \
     cp *.py *.r /usr/bin/  
 
-RUN wget https://github.com/gmarcais/Jellyfish/releases/download/v1.1.12/jellyfish-1.1.12.tar.gz && \
+RUN cd work && wget https://github.com/gmarcais/Jellyfish/releases/download/v1.1.12/jellyfish-1.1.12.tar.gz && \
     tar -xvzf jellyfish-1.1.12.tar.gz && \
     rm jellyfish-1.1.12.tar.gz && \
     cd jellyfish-1.1.12 && \
@@ -45,3 +45,6 @@ RUN echo deb http://mirror.las.iastate.edu/CRAN/bin/linux/debian stretch-cran35/
     apt-get install -y r-base r-base-dev
 
 RUN R -e "install.packages('VGAM', repos='https://cloud.r-project.org' )"
+
+
+ENV RUN_CMD quake.py

@@ -23,8 +23,10 @@ RUN cd /work && \
   make && \
   cp bowtie2* /usr/local/bin
 
-RUN git clone https://github.com/mourisl/Lighter.git && \
+RUN cd /work/ && git clone https://github.com/mourisl/Lighter.git && \
     cd Lighter && \
     make && \ 
     cp lighter /usr/local/bin;
+
+ENV RUN_CMD lighter
 

@@ -11,3 +11,5 @@ RUN cd /work && \
     sed -i 's/prev\[x\]/::prev\[x\]/' ace.cpp && \
     make && \
     cp ace /usr/local/bin
+
+ENV RUN_CMD ace

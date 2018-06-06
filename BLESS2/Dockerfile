@@ -38,3 +38,4 @@ RUN cd /work && \
     cp bless /usr/local/bin && \
     cp kmc/bin/kmc /usr/local/bin 
 
+ENV RUN_CMD bless

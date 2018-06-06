@@ -10,9 +10,12 @@ RUN set ex; \
   apt-get install -y --no-install-recommends \
   mono-complete
 
-RUN wget https://bioinformatics.csiro.au/public/files/Linux-1.1.3.tar.gz; \
-  tar xvzf Linux-1.1.3.tar.gz; \
-  mv Linux/* .
+RUN cd /work && \
+  mkdir -p blue && \
+  cd blue && \
+  wget https://bioinformatics.csiro.au/public/files/Linux-1.1.3.tar.gz && \
+  tar xvzf Linux-1.1.3.tar.gz && \
+  mv Linux/* /
 
 RUN cd /work && \
   wget https://github.com/01org/tbb/archive/2018_U2.tar.gz && \
