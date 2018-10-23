@@ -26,7 +26,7 @@ RUN set -ex; \
 fi
 
 # scm etc.
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update -y && apt-get install -y --no-install-recommends \
     git \
     git-core \
     mercurial \
@@ -72,16 +72,12 @@ RUN set ex; \
   wget \
   zlib1g-dev
 
-RUN which g++
-#  python python-dev zlib1g-dev python-numpy python-pip \
-# install python from the source : taken from  https://github.com/docker-library/python
-# ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
 
-#install python pip
+# install python pip
 RUN apt-get update -y && apt-get install -y python-pip
 
-# upgrade java and set java home
+# install java 8 and set java home
 RUN apt-get update -y && apt-get install -y openjdk-8-jdk openjdk-8-doc openjdk-8-jre
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
