@@ -19,4 +19,10 @@ RUN cd /work && \
   make && \
   cp bwa /usr/local/bin
 
+RUN cd /work && \
+  git clone https://github.com/lh3/seqtk.git && \
+  cd /work/seqtk && \
+  make && \
+  cp seqtk /usr/local/bin 
+
 ENV RUN_CMD bfc
