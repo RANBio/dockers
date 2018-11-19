@@ -1,3 +1,3 @@
-docker build -t rcents/im:Quake .
+docker build -t rcents/im:quake .
 #docker login
-docker push rcents/im:Quake
+docker push rcents/im:quake
