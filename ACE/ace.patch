@@ -1,0 +1,59 @@
+diff --git a/ace.cpp b/ace.cpp
+index f2c1fe2..b9fc0ea 100644
+--- a/ace.cpp
++++ b/ace.cpp
+@@ -136,12 +136,12 @@ void insert(unsigned long kmer, unsigned long r,  short loc, short x)
+     if (first[x])
+     {
+       first[x] = false;
+-      prev[x] = level[x] = v;
++      ::prev[x] = level[x] = v;
+     }
+     else
+     {
+-      prev[x]->children[3] = v;
+-      prev[x] = v;
++      ::prev[x]->children[3] = v;
++      ::prev[x] = v;
+       v->children[3] = 0;
+     }
+   }
+@@ -426,7 +426,7 @@ void finalize(char* argv[])
+   }	    
+   delete root;
+   delete level;
+-  delete prev;
++  delete ::prev;
+   delete first;
+ }
+ 
+@@ -531,10 +531,10 @@ void Initialize(char* argv[])
+   Index[6] = 2;
+   Index[19] = 3;
+   p2_len=(int)min(2.0,floor(log2(sysconf(_SC_NPROCESSORS_ONLN))/2));
+-  cores=1<<2*p2_len;
++  p2_len=(int)min(2L, strtol(argv[4], 0, 10)); cores=1<<2*p2_len;
+   root=new node**[cores];
+   level=new node*[cores];
+-  prev=new node*[cores];
++  ::prev=new node*[cores];
+   first=new bool[cores];	
+   
+   #ifdef __linux__
+@@ -584,13 +584,13 @@ int main(int argc, char* argv[])
+ {
+   time_t ptime=0,ctime;
+   time(&ptime); 
+-  if(argc<4)
++  if(argc<5)
+   {
+     cout<<"--------------------------------------------------------------------\n";
+     cout<<"ACE corrects substitution errors in a single/paired_end Illumina archive.\n";
+     cout<<"It receives the genome length and the name of input file and output files.\n";
+     cout<<"To run ACE:\n";
+-    cout<<"./ace Genome_length(bp) Inputfile Outputfile\n\n"<<flush;
++    cout<<"./ace Genome_length(bp) Inputfile Outputfile log(cores)\n\n"<<flush;
+     return 0;
+   }
+   Initialize(argv);
+
