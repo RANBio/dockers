@@ -1,5 +1,5 @@
 diff --git a/ace.cpp b/ace.cpp
-index f2c1fe2..bc39184 100644
+index f2c1fe2..0caf2af 100644
 --- a/ace.cpp
 +++ b/ace.cpp
 @@ -136,12 +136,12 @@ void insert(unsigned long kmer, unsigned long r,  short loc, short x)
@@ -27,12 +27,13 @@ index f2c1fe2..bc39184 100644
    delete first;
  }
  
-@@ -531,10 +531,10 @@ void Initialize(char* argv[])
+@@ -530,11 +530,11 @@ void Initialize(char* argv[])
+   Index[2] = 1;
    Index[6] = 2;
    Index[19] = 3;
-   p2_len=(int)min(2.0,floor(log2(sysconf(_SC_NPROCESSORS_ONLN))/2));
--  cores=1<<2*p2_len;
-+  p2_len=(int)min(2L, strtol(argv[4], 0, 10)); cores=1<<2*p2_len;
+-  p2_len=(int)min(2.0,floor(log2(sysconf(_SC_NPROCESSORS_ONLN))/2));
++  p2_len=(int)min(2.0, floor(log2(strtol(argv[4], 0, 10))/2));
+   cores=1<<2*p2_len;
    root=new node**[cores];
    level=new node*[cores];
 -  prev=new node*[cores];
