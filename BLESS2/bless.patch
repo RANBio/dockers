@@ -1,0 +1,12 @@
+--- Makefile	2018-11-19 20:42:24.959673627 -0500
++++ Makefile.patched	2018-11-19 20:42:18.967640481 -0500
+@@ -1,7 +1,7 @@
+ CC=mpicxx
+ PROG=bless
+-CFLAGS=-Wall -O3 -I ./boost/include -I ./google-sparsehash -I ./zlib/install/include -I ./klib -I ./kmc/kmc_api -fopenmp -std=c++11
+-LDFLAGS=./boost/lib/libboost_filesystem.a ./boost/lib/libboost_system.a ./boost/lib/libboost_iostreams.a ./zlib/install/lib/libz.a -fopenmp -std=c++11
++CFLAGS=-Wall -O -I /usr/include -I klib/ -I google-sparsehash/ -I kmc/kmc_api/ -fopenmp -std=c++11
++LDFLAGS=-lboost_filesystem -lboost_system -lboost_iostreams -lz -fopenmp -std=c++11
+ SRCS=kmc/kmc_api/kmc_file.cpp kmc/kmc_api/kmer_api.cpp kmc/kmc_api/mmer.cpp murmurhash3/MurmurHash3.cpp check_inputs.cpp correct_errors.cpp count_solid_kmers.cpp main.cpp parse_args.cpp
+ OBJS=$(SRCS:.cpp=.o)
+ ZLIB=ZLIB

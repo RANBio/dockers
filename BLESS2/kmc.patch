@@ -1,0 +1,22 @@
+--- makefile	2018-11-19 20:11:19.460951301 -0500
++++ makefile.patched	2018-11-19 17:19:39.899243462 -0500
+@@ -12,7 +12,7 @@
+ # BLESS
+ CLINK	= -fopenmp -O3 -pthread -std=c++11
+ 
+-DISABLE_ASMLIB = false
++DISABLE_ASMLIB = true
+ 
+ KMC_OBJS = \
+ $(KMC_MAIN_DIR)/kmer_counter.o \
+@@ -28,9 +28,7 @@
+ $(KMC_MAIN_DIR)/kb_storer.o \
+ $(KMC_MAIN_DIR)/kmer.o
+ 
+-KMC_LIBS = \
+-$(KMC_MAIN_DIR)/libs/libz.a \
+-$(KMC_MAIN_DIR)/libs/libbz2.a
++KMC_LIBS = -lz -lbz2
+ 
+ KMC_DUMP_OBJS = \
+ $(KMC_DUMP_DIR)/nc_utils.o \
