@@ -1,5 +1,5 @@
 --- spectacle/Makefile	2018-11-20 14:37:35.848508428 -0500
-+++ Makefile	2018-11-20 14:43:24.090652167 -0500
++++ Makefile	2018-11-20 15:04:33.962529554 -0500
 @@ -1,6 +1,6 @@
  CC=g++
 -CFLAGS=-Wall -O3 -std=c++11 -I ./boost/include
@@ -9,3 +9,12 @@
  SRC_DIR=src
  LIB_DIR=lib
  BIN_DIR=bin
+@@ -84,8 +84,6 @@
+ evaluate: $(SRC_DIR)/evaluate.o $(SRC_DIR)/evaluate-wrap.o
+ 	$(CC) -O3 -std=c++11 `perl -MConfig -e 'print $$Config{lddlflags}'` -o $(LIB_DIR)/evaluate.so $?
+ 	chmod 644 $(LIB_DIR)/evaluate.so
+-	cd ncurses; ./compile; cd ..
+-	cd samtools; ./compile
+ 
+ clean:
+ 	rm -f $(BIN_DIR)/generate-map.from-fasta.single.common
